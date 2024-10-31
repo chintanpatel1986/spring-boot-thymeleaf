@@ -6,10 +6,7 @@ import org.chintanpatel.app.service.DepartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class DepartmentController {
@@ -40,8 +37,8 @@ public class DepartmentController {
     }
 
 
-    @GetMapping("/departments/manageDepartment")
-    public String manageDepartment(@RequestParam("departmentId")Long departmentId, Model model) {
+    @GetMapping("/departments/manageDepartment/{departmentId}")
+    public String manageDepartment(@PathVariable Long departmentId, Model model) {
         if (departmentId != null) {
             model.addAttribute("department", departmentService.getDepartmentById(departmentId));
             model.addAttribute("departmentList", departmentService.getAllDepartmentList());
@@ -49,8 +46,8 @@ public class DepartmentController {
         return "department-form";
     }
 
-    @GetMapping("/departments/deleteDepartment")
-    public String deleteDepartment(@RequestParam("departmentId")Long departmentId) {
+    @GetMapping("/departments/deleteDepartment/{departmentId}")
+    public String deleteDepartment(@PathVariable Long departmentId) {
         if (departmentId != null) {
             departmentService.deleteDepartmentById(departmentId);
         }

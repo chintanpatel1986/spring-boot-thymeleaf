@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<h3>Welcome to spring boot and thymeleaf template web application...</h3>
+<div class="container-fluid mt-3">
+    <a th:href="@{/departments/getDepartment}" class="link-success fs-4">Department</a>
+</div>
 </body>
 </html>
