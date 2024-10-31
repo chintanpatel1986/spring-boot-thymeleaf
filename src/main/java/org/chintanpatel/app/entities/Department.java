@@ -1,0 +1,53 @@
+package org.chintanpatel.app.entities;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "tbl_department")
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ColumnDefault("nextval('tbl_department_department_id_seq')")
+    @Column(name = "department_id", nullable = false)
+    private Long departmentId;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "department_name", nullable = false)
+    private String departmentName;
+
+    @OneToMany(mappedBy = "department")
+    private Set<Employee> tblEmployees = new LinkedHashSet<>();
+
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public Set<Employee> getTblEmployees() {
+        return tblEmployees;
+    }
+
+    public void setTblEmployees(Set<Employee> tblEmployees) {
+        this.tblEmployees = tblEmployees;
+    }
+
+}
