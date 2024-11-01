@@ -1,7 +1,7 @@
 package org.chintanpatel.app.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -18,7 +18,7 @@ public class Department {
     private Long departmentId;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter Department Name")
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
