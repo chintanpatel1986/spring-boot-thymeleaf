@@ -1,7 +1,8 @@
 package org.chintanpatel.springbootthymeleaf.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -18,7 +19,7 @@ public class Role {
     private Long roleId;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter Role Type")
     @Column(name = "role_type", nullable = false)
     private String roleType;
 

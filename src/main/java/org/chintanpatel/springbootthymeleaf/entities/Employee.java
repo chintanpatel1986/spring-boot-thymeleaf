@@ -1,6 +1,9 @@
 package org.chintanpatel.springbootthymeleaf.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,53 +22,56 @@ public class Employee {
     private Long employeeId;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter FirstName")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter MiddleName")
     @Column(name = "middle_name", nullable = false)
     private String middleName;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter LastName")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Select Gender")
     @Column(name = "gender", nullable = false)
     private String gender;
 
+    @NotEmpty(message = "Please Enter Programming Language")
     @Column(name = "programming_language", columnDefinition = "varchar [](255) not null")
     private String[] programmingLanguage;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter Email")
+    @Email(message = "Please Enter Valid Email")
     @Column(name = "email", nullable = false)
     private String email;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter Mobile Number")
     @Column(name = "mobile", nullable = false)
     private String mobile;
 
-    @NotNull
+    @NotNull(message = "Please Enter BirthDate")
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
     @Size(max = 255)
-    @NotNull
+    @NotEmpty(message = "Please Enter UserName")
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Size(max = 15)
-    @NotNull
+    @Size(min = 8, max = 15, message = "Password Must Be Between 8 And 15 Character")
+    @NotEmpty(message = "Please Enter Password")
     @Column(name = "password", nullable = false, length = 15)
     private String password;
 
-    @NotNull
+    @Valid
+    @NotNull(message = "Please Select Department")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ColumnDefault("nextval('tbl_employee_department_id_seq')")
@@ -73,7 +79,8 @@ public class Employee {
     private Department department;
 
 
-    @NotNull
+    @Valid
+    @NotNull(message = "Please Select Role")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ColumnDefault("nextval('tbl_employee_role_id_seq')")
