@@ -49,7 +49,7 @@ public class RoleController {
     }
 
 
-    @GetMapping("/roles/deleteRoles/{roleId}")
+    @GetMapping("/roles/deleteRole/{roleId}")
     public String deleteRole(@PathVariable Long roleId) {
         if (roleId != null) {
             roleService.deleteRoleById(roleId);
