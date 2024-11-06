@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -56,6 +57,7 @@ public class Employee {
     @Column(name = "mobile", nullable = false)
     private String mobile;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Please Enter BirthDate")
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
