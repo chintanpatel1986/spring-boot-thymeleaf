@@ -7,6 +7,151 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
+<div class="container mt-5 border border-1">
+    <div class="container">
+        <div class="fs-1">
+            <h1 class="fw-bolder">Manage Employee</h1>
+        </div>
+        <form th:action="@{/employees/saveEmployee}" method="post" class="row g-3" th:object="${employee}">
+            <input type="hidden" th:field="*{employeeId}">
+            <div class="col-4 mt-5">
+                <label class="form-label fw-bold">FirstName</label>
+                <input type="text" th:field="*{firstName}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+            </div>
+            <div class="col-4 mt-5">
+                <label class="form-label fw-bold">MiddleName</label>
+                <input type="text" th:field="*{middleName}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
+            </div>
+            <div class="col-4 mt-5">
+                <label class="form-label fw-bold">LastName</label>
+                <input type="text" th:field="*{lastName}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+            </div>
+            <div class="col-6">
+                <div class="col-6">
+                    <label class="form-label fw-bold">Gender</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" th:field="*{gender}" class="form-check-input" value="Male" th:checked="${employee.gender == 'Male'}">
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" th:field="*{gender}" class="form-check-input" value="Female" th:checked="${employee.gender == 'Female'}">
+                    <label class="form-check-label">Female</label>
+                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+            </div>
+            <div class="col-6">
+                <div class="col-6">
+                    <label class="form-label fw-bold">Programming Language</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="Java" th:checked="${employee.programmingLanguage == 'Java'}">
+                    <label class="form-check-label">Java</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="Python" th:checked="${employee.programmingLanguage == 'Python'}">
+                    <label class="form-check-label">Python</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="C++" th:checked="${employee.programmingLanguage == 'C++'}">
+                    <label class="form-check-label">C++</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="PHP" th:checked="${employee.programmingLanguage == 'PHP'}">
+                    <label class="form-check-label">PHP</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="HTML" th:checked="${employee.programmingLanguage == 'HTML'}">
+                    <label class="form-check-label">HTML</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="CSS" th:checked="${employee.programmingLanguage == 'CSS'}">
+                    <label class="form-check-label">CSS</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" th:field="*{programmingLanguage}" class="form-check-input" value="JavaScript" th:checked="${employee.programmingLanguage == 'JavaScript'}">
+                    <label class="form-check-label">JavaScript</label>
+                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('programmingLanguage')}" th:errors="*{programmingLanguage}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">Email</label>
+                <input type="text" th:field="*{email}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">Mobile</label>
+                <input type="text" th:field="*{mobile}" class="form-control">
+                <div class="text-danger" th:field="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">BirthDate</label>
+                <input type="date" th:field="*{birthDate}" class="form-control">
+                <div class="text-danger" th:field="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">UserName</label>
+                <input type="text" th:field="*{userName}" class="form-control">
+                <div class="text-danger" th:field="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" th:field="*{password}" class="form-control">
+                <div class="text-danger" th:field="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+            <div class="col-4">
+                <label class="form-label fw-bold">Department</label>
+                <select th:field="*{department}" class="form-select">
+                    <option value="">----------Select Department----------</option>
+                    <option th:each="department : ${departmentList}" th:value="${department.departmentId}" th:text="${department.departmentName}"></option>
+                </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
+            </div>
+            <div class="col-12 d-grid gap-2">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Gender</th>
+                    <th>Programming Language</th>
+                    <th>Mobile</th>
+                    <th>BirthDate</th>
+                    <th>UserName</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.gender}"></td>
+                    <td th:text="${#strings.arrayJoin(employee.programmingLanguage,',')}"></td>
+                    <td th:text="${employee.mobile}"></td>
+                    <td th:text="${employee.birthDate}"></td>
+                    <td th:text="${employee.userName}"></td>
+                    <td th:text="${employee.department.departmentName}"></td>
+                    <td>
+                        <a th:href="@{/employees/manageEmployee/{employeeId}(employeeId=${employee.employeeId})}" class="link-success">Edit</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/employees/deleteEmployee/{employeeId}(employeeId=${employee.employeeId})}" class="link-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container mt-3">
+    <a th:href="@{/back}" class="link-primary fs-4">Back</a>
+</div>
 </body>
 </html>
